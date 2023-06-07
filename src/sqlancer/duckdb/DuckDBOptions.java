@@ -14,6 +14,8 @@ import sqlancer.common.oracle.CompositeTestOracle;
 import sqlancer.common.oracle.TestOracle;
 import sqlancer.duckdb.DuckDBOptions.DuckDBOracleFactory;
 import sqlancer.duckdb.DuckDBProvider.DuckDBGlobalState;
+import sqlancer.duckdb.test.DuckDBContradictionHavingOracle;
+import sqlancer.duckdb.test.DuckDBContradictionWhereOracle;
 import sqlancer.duckdb.test.DuckDBNoRECOracle;
 import sqlancer.duckdb.test.DuckDBQueryPartitioningAggregateTester;
 import sqlancer.duckdb.test.DuckDBQueryPartitioningDistinctTester;
@@ -119,6 +121,22 @@ public class DuckDBOptions implements DBMSSpecificOptions<DuckDBOracleFactory> {
             public TestOracle<DuckDBGlobalState> create(DuckDBGlobalState globalState) throws SQLException {
                 return new DuckDBQueryPartitioningGroupByTester(globalState);
             }
+        },
+        CONTRADICTION_WHERE {
+
+            @Override
+            public TestOracle<DuckDBGlobalState> create(DuckDBGlobalState globalState) throws Exception {
+                return new DuckDBContradictionWhereOracle(globalState);
+            }
+
+        },
+        CONTRADICTION_HAVING {
+
+            @Override
+            public TestOracle<DuckDBGlobalState> create(DuckDBGlobalState globalState) throws Exception {
+                return new DuckDBContradictionHavingOracle(globalState);
+            }
+
         },
         AGGREGATE {
 
