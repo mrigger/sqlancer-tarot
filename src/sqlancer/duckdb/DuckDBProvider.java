@@ -45,7 +45,9 @@ public class DuckDBProvider extends SQLProviderAdapter<DuckDBGlobalState, DuckDB
         DELETE(DuckDBDeleteGenerator::generate), //
         UPDATE(DuckDBUpdateGenerator::getQuery), //
         CREATE_VIEW(DuckDBViewGenerator::generate), //
-        EXPLAIN((g) -> {
+        PRAGMA((g) -> {
+            return new SQLQueryAdapter("PRAGMA disable_optimizer;");
+        }), EXPLAIN((g) -> {
             ExpectedErrors errors = new ExpectedErrors();
             DuckDBErrors.addExpressionErrors(errors);
             DuckDBErrors.addGroupByErrors(errors);
@@ -82,6 +84,7 @@ public class DuckDBProvider extends SQLProviderAdapter<DuckDBGlobalState, DuckDB
         case VACUUM: // seems to be ignored
         case ANALYZE: // seems to be ignored
         case EXPLAIN:
+        case PRAGMA:
             return r.getInteger(0, 2);
         case DELETE:
             return r.getInteger(0, globalState.getDbmsSpecificOptions().maxNumDeletes + 1);
