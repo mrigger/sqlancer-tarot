@@ -1,5 +1,18 @@
 [![Build Status](https://github.com/sqlancer/sqlancer/workflows/ci/badge.svg)](https://github.com/sqlancer/sqlancer/actions)
 [![Twitter](https://img.shields.io/twitter/follow/sqlancer_dbms?style=social)](https://twitter.com/sqlancer_dbms)
+
+# TAROT
+
+Quickstart instructions:
+```
+git clone https://github.com/mrigger/sqlancer-tarot
+cd sqlancer
+mvn package -DskipTests
+cd target
+java -jar sqlancer-*.jar duckdb
+```
+
+
 # SQLancer
 
 
