@@ -3,6 +3,11 @@
 
 # TAROT
 
+Requirements:
+* Git
+* Maven
+* [Eclipse (optional)](https://www.eclipse.org/downloads/packages/release/kepler/sr1/eclipse-ide-java-developers)
+
 Quickstart instructions:
 ```
 git clone https://github.com/mrigger/sqlancer-tarot
@@ -12,6 +17,10 @@ cd target
 java -jar sqlancer-*.jar duckdb
 ```
 
+Importing into Eclipse:
+```
+File → Import → Existing Maven Projects
+```
 
 # SQLancer
 
