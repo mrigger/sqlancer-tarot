@@ -14,6 +14,7 @@ import sqlancer.common.oracle.CompositeTestOracle;
 import sqlancer.common.oracle.TestOracle;
 import sqlancer.duckdb.DuckDBOptions.DuckDBOracleFactory;
 import sqlancer.duckdb.DuckDBProvider.DuckDBGlobalState;
+import sqlancer.duckdb.test.DuckDBContainmentOracle;
 import sqlancer.duckdb.test.DuckDBNoRECOracle;
 import sqlancer.duckdb.test.DuckDBQueryPartitioningAggregateTester;
 import sqlancer.duckdb.test.DuckDBQueryPartitioningDistinctTester;
@@ -94,6 +95,15 @@ public class DuckDBOptions implements DBMSSpecificOptions<DuckDBOracleFactory> {
     public List<DuckDBOracleFactory> oracles = Arrays.asList(DuckDBOracleFactory.QUERY_PARTITIONING);
 
     public enum DuckDBOracleFactory implements OracleFactory<DuckDBGlobalState> {
+
+        CONTAINMENT {
+
+            @Override
+            public TestOracle<DuckDBGlobalState> create(DuckDBGlobalState globalState) throws Exception {
+                return new DuckDBContainmentOracle(globalState);
+            }
+
+        },
         NOREC {
 
             @Override
